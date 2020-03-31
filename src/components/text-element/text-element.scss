@@ -1,0 +1,9 @@
+@import '../../shared/styles/fonts.scss';
+
+.text-element {
+  font-size: $medium-font-size;
+  font-weight: $font-weight-light;
+  line-height: 150%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

@@ -1,0 +1,166 @@
+@import '../../shared/styles/fonts.scss';
+@import '../../shared/styles/colors.scss';
+@import '../../shared/styles/breakpoints';
+
+$box-shadow: 0 0.4rem 1.2rem 0.2rem $black5;
+$border-width: .1rem;
+$tab-height: 80px;
+$tab-gradient-z: 1;
+$tab-caret-z: 2;
+
+.tabs-block {
+  $tabsBlock: &;
+
+  &-wrapper {
+    border: $border-width solid $gray-medium;
+    box-shadow: $box-shadow;
+    box-sizing: border-box;
+    display: block;
+    max-width: 900px;
+    width: 80%;
+  }
+
+  &__header {
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: $small-font-size;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &::after,
+    &::before {
+      content: ' ';
+      height: calc(100% - (#{$border-width} * 2));
+      position: absolute;
+      width: 3rem;
+      z-index: $tab-gradient-z;
+    }
+    &::before {
+      background: linear-gradient(to left, transparent, $white);
+    }
+    &::after {
+      background: linear-gradient(to right, transparent, $white);
+      right: 0;
+    }
+
+    &-wrap {
+      height: $tab-height;
+      overflow: hidden;
+      position: relative;
+
+      &:hover {
+        
+        #{$tabsBlock}__header-arrow {
+          opacity: 1;
+        }
+      }
+    }
+
+    &-tab {
+      align-items: center;
+      background: $gray-light;
+      border: none;
+      border-bottom: .1rem solid $gray-medium;
+      border-right: .1rem solid $gray-medium;
+      color: $slate;
+      display: flex;
+      font-size: $small-font-size;
+      font-weight: $font-weight-bold;
+      height: $tab-height;
+      justify-content: center;
+      letter-spacing: .12rem;
+      line-height: 150%;
+      min-width: 40%;
+      outline: 0;
+      overflow-y: hidden;
+      padding: 1rem .5rem;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      word-break: break-word;
+      transition: background 250ms, border 250ms;
+
+      &:last-of-type {
+        border-right: none;
+      }
+
+      &:hover {
+        background: $gray-dark;
+        cursor: pointer;
+      }
+
+      &--active {
+        background: $white;
+        border-bottom: 0;
+        color: $slate-light;
+
+        &:hover {
+          background: $white;
+          cursor: initial;
+        }
+      }
+
+      @media screen and  (min-width: $small-breakpoint) {
+        min-width: 30%;
+        padding: 1rem 2rem;
+      }
+
+      @media screen and  (min-width: $medium-breakpoint) {
+        min-width: 23%;
+        padding: 1rem .5rem;
+      }
+    }
+
+    &-arrow {
+      align-items: center;
+      background: transparentize($color: $slate, $amount: .1);
+      border: 0;
+      border-radius: 4px;
+      color: $white;
+      display: flex;
+      font-size: 3rem;
+      height: 80%;
+      justify-content: center;
+      min-width: 4rem;
+      opacity: 0;
+      outline: 0;
+      position: absolute;
+      top: 10%;
+      transition: visibility 0s linear 100ms, opacity 300ms linear;
+      z-index: $tab-caret-z;
+    
+      &:hover {
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+      }
+  
+      &--hidden {
+        opacity: 0 !important;
+        visibility: hidden;
+      }
+  
+      &--prev {
+        left: .5%;
+      }
+    
+      &--next {
+        right: .5%;
+      }
+    }   
+  }
+
+  &__content {
+    align-items: flex-start;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    justify-content: flex-start;
+    overflow: hidden;
+
+    &-item {
+      padding: 2rem 3rem 3.5rem;
+      width: 100%;
+    }
+  }
+}
